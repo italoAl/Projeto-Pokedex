@@ -1,29 +1,33 @@
-<a class="pokemon">
-    <section class="pokemon_status">
-        <h2>
-            Bulbassauro
-        </h2>
+<poke-search (emitSearch)="getSearch($event)"></poke-search>
+
+
+<section class= "listagem">     
+<ng-template ngFor let-pokemon [ngForOf]="getAllPokemons">
+    <a [routerLink]="['details', pokemon.status.id]" class="pokemon" *ngIf="pokemon.status">
+        <section class="pokemon__status">
+            <h2>
+                {{ pokemon.name }} 
+            </h2>
         <ul>
-            <li>Grass</li>
-            <li>Poison</li>
+            <li *ngFor="let value of pokemon.status.types">
+                {{ value.type.name }}
+            </li>
         </ul>
     </section>
-    <section class="pokemon_image">
-        <img src="../../../assets/image 1.svg" alt="Bulbassauro" >
+    <section class="pokemon__image">
+        <img 
+        [src]="pokemon.status.sprites.other.dream_world.front_default" 
+        alt="pokemon.name" 
+        >
     </section>
 </a>
 
-<a class="pokemon">
-    <section class="pokemon_status">
-        <h2>
-            Bulbassauro
-        </h2>
-        <ul>
-            <li>Grass</li>
-            <li>Poison</li>
-        </ul>
-    </section>
-    <section class="pokemon_image">
-        <img src="../../../assets/image 1.svg" alt="Bulbassauro" >
-    </section>
-</a>
+
+</ng-template>
+</section>
+
+<img src="../../../assets/error.png" 
+    alt="deu erro na mostragem do pokemon"
+    width="100%"
+    *ngIf="apiError"
+    >
